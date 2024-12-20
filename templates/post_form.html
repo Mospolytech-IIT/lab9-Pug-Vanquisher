@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма Задач</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>{{ "Редактировать" if post else "Добавить" }} Задачу</h1>
+    <form method="post">
+        <label>Заголовок:</label>
+        <input type="text" name="title" value="{{ post.title if post else '' }}" required><br>
+        <label>Описание:</label>
+        <textarea name="content" required>{{ post.content if post else '' }}</textarea><br>
+        <label>Пользователь:</label>
+        <select name="user_id" required>
+            {% for user in users %}
+            <option value="{{ user.id }}" {% if post and post.user_id == user.id %}selected{% endif %}>
+                {{ user.username }}
+            </option>
+            {% endfor %}
+        </select><br>
+        <button type="submit">Сохранить</button>
+    </form>
+</body>
+</html>

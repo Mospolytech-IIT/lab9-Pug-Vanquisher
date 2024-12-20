@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма пользователя</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>{{ "Редактировать" if user else "Добавить" }} пользователя</h1>
+    <form method="post">
+        <label>Имя пользователя:</label>
+        <input type="text" name="username" value="{{ user.username if user else '' }}" required><br>
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ user.email if user else '' }}" required><br>
+        <label>Пароль:</label>
+        <input type="password" name="password" required><br>
+        <button type="submit">Сохранить</button>
+    </form>
+</body>
+</html>
