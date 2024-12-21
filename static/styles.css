@@ -1,0 +1,130 @@
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;  /* Современный шрифт */
+    background-color: #333333; /* Темно-серый фон */
+    color: #F1F1F1; /* Светлый цвет текста для контраста */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-image: url('/static/factory-background.jpg'); /* Фоновое изображение завода */
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    font-family: 'Impact', sans-serif; /* Более жесткий и промышленный шрифт */
+    color: #F1F1F1;
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для контраста */
+}
+
+/* Ссылки */
+a {
+    color: #F9A825; /* Желто-золотой цвет, похожий на индустриальные акценты */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #D32F2F; /* Красный акцент при наведении */
+    text-decoration: underline;
+}
+
+/* Форма */
+form {
+    background-color: rgba(0, 0, 0, 0.5); /* Темный фон формы */
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+    margin-top: 30px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #424242;
+    border: 2px solid #F9A825; /* Желтая рамка */
+    border-radius: 4px;
+    color: #F1F1F1;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    background-color: #616161; /* Более светлый фон при фокусе */
+    outline: none;
+}
+
+/* Кнопки */
+button {
+    background-color: #F9A825;
+    color: #333;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #D32F2F; /* Красный при наведении */
+    color: white;
+}
+
+/* Список пользователей и постов */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    color: #F1F1F1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+li a {
+    color: #F9A825;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #333;
+    border-radius: 4px;
+}
+
+li a:hover {
+    background-color: #D32F2F;
+    color: white;
+}
+
+li .delete {
+    color: #D32F2F;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+li .delete:hover {
+    color: #F9A825;
+}
