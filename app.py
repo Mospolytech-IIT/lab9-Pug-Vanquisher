@@ -79,6 +79,7 @@ async def delete_user(user_id: int):
     user = session.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    session.query(Post).filter(Post.user_id == user_id).delete()
     session.delete(user)
     session.commit()
     return RedirectResponse("/users", status_code=303)
