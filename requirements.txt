@@ -1,5 +1,0 @@
-sqlalchemy
-pymysql
-fastapi
-uvicorn
-jinja2

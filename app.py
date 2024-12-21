@@ -4,6 +4,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from models import session, User, Post, engine
+import traceback
+from sqlalchemy.exc import IntegrityError
 
 # Инициализация FastAPI
 app = FastAPI()
@@ -35,11 +37,16 @@ async def new_user_form(request: Request):
 
 
 @app.post("/users/new")
-async def create_user(username: str = Form(...), email: str = Form(...), password: str = Form(...)):
+async def create_user(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
     new_user = User(username=username, email=email, password=password)
-    session.add(new_user)
-    session.commit()
-    return RedirectResponse("/users", status_code=303)
+    try:
+        session.add(new_user)
+        session.commit()
+        return RedirectResponse("/users", status_code=303)
+    except IntegrityError as e:
+        session.rollback()  # Откат при ошибке
+        error_message = "Дурак, пиши уникальные значения!"
+        return templates.TemplateResponse("user_form.html", {"request": request, "error_message": error_message})
 
 
 @app.get("/users/edit/{user_id}")
@@ -51,15 +58,20 @@ async def edit_user_form(request: Request, user_id: int):
 
 
 @app.post("/users/edit/{user_id}")
-async def update_user(user_id: int, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
+async def update_user(request: Request, user_id: int, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
     user = session.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     user.username = username
     user.email = email
     user.password = password
-    session.commit()
-    return RedirectResponse("/users", status_code=303)
+    try:
+        session.commit()
+        return RedirectResponse("/users", status_code=303)
+    except IntegrityError as e:
+        session.rollback()  # Откат при ошибке
+        error_message = "Дурак, пиши уникальные значения"
+        return templates.TemplateResponse("user_form.html", {"request": request, "user": user, "error_message": error_message})
 
 
 @app.get("/users/delete/{user_id}")

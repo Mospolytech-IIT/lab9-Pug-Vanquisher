@@ -5,7 +5,7 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 DATABASE_URL = "mysql+pymysql://root:pugpug12@127.0.0.1:3306/piton"
 
 # Создаем подключение и базу
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=False)
 Base = declarative_base()
 
 # Таблица Users
